@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set Node.js 18.x
         uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
@@ -42,6 +43,15 @@ jobs:
       - run: |
           pnpm run all
       
-      - name: Create Semantic Release
-        run: |
-          pnpx semantic-release
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v3
+        id: semantic
+        with:
+            semantic_version: 19
+            extra_plugins: |
+                @semantic-release/exec@6
+                @semantic-release/git@10
+                @semantic-release/changelog@6
+                @semantic-release/exec@6
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
