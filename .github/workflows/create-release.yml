@@ -6,6 +6,11 @@ on:
       - alpha
       - beta
 
+permissions:
+  contents: write
+  issues: write
+
+
 jobs:
   create-release:
     runs-on: ubuntu-latest
