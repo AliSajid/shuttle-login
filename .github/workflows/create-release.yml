@@ -1,0 +1,25 @@
+name: Create Release
+on:
+  workflow_call:
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Rebuild the dist/ directory
+        run: |
+          npm run build
+          npm run package
+      
+      - name: Create Semantic Release
+        run: |
+          npx semantic-release
