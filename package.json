@@ -35,7 +35,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AliSajid/shuttle-login"
+    "url": "https://github.com/AliSajid/shuttle-login"
   },
   "scripts": {
     "all": "pnpm run build && pnpm run format && pnpm run lint && pnpm run package && pnpm test",
