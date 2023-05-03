@@ -45,4 +45,4 @@ jobs:
       
       - name: Create Semantic Release
         run: |
-          npx semantic-release
+          pnpx semantic-release
