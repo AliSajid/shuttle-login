@@ -71,6 +71,16 @@
         "i18n-text/no-en": "off",
         "import/no-namespace": "off",
         "no-unused-vars": "off",
-        "semi": "off"
+        "semi": "off",
+        "filenames/match-regex": [
+            "error",
+            "^[a-z0-9-_.]+$",
+            true
+        ],
+        "filenames/match-exported": [
+            "error",
+            "snake"
+        ],
+        "filenames/no-index": "error"
     }
 }
