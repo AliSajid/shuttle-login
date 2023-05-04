@@ -2,7 +2,7 @@ name: 'Ali Sajid Imami'
 description: 'Set up the runner to authenticate to and interact with [shuttle.rs](https://shuttle.rs)'
 author: 'Ali Sajid Imami'
 inputs:
-  shuttle_api_key: # change this
+  shuttle-api-key:
     required: true
     description: 'The API Key obtained from shuttle.rs'
 runs:
