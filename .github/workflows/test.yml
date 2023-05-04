@@ -42,17 +42,10 @@ jobs:
       - run: |
           pnpm run all
 
-  # test-with-params: # make sure the action works on a clean machine without building
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-  #     - uses: ./
-  #       with:
-  #         minimum: 1
-  #         maximum: 5
-
-  # test-without-params: # make sure the action works on a clean machine without building
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-  #     - uses: ./
+  test-with-params: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+      - uses: ./
+        with:
+          shuttle-api-key: ${{ secrets.SHUTTLE_API_KEY }}
