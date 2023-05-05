@@ -41,6 +41,9 @@ jobs:
 
       - run: |
           pnpm run all
+      
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
 
   test-with-params: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
