@@ -13,7 +13,7 @@ async function run(): Promise<void> {
       core.debug('Placing API key in appropriate location')
       await place_api_key(api_key)
       core.debug('Successfully placed API key in appropriate location')
-      core.setOutput('login_success', 'true')
+      core.setOutput('login-status', 'success')
     } else {
       core.debug('Operating System is not Linux')
       core.debug('Operating System is not supported')
