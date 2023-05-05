@@ -31,15 +31,15 @@ describe('place_api_key', () => {
   it('handles errors', async () => {
     // Arrange
     const api_key = 'my-api-key'
-    const error = new Error('test error')
-    fs.promises.mkdir = jest.fn().mockRejectedValueOnce(error)
+    const error_message = 'unable to create directory'
+    fs.promises.mkdir = jest.fn().mockRejectedValueOnce(error_message)
 
     // Act
     try {
       await place_api_key(api_key)
     } catch (error) {
       // Assert
-      expect(error).toBeInstanceOf(Error)
+      expect(error.toString()).toBe(error_message)
     }
 
     // Assert
