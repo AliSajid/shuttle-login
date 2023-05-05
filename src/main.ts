@@ -1,26 +1,31 @@
 import * as core from '@actions/core'
-import {login_linux} from './login_linux'
-import {login_mac} from './login_mac'
-import {login_windows} from './login_windows'
+import {place_api_key} from './setup_api_keys'
 
 async function run(): Promise<void> {
   try {
+    core.debug('Running shuttle-login action')
+    core.debug('Reading shuttle-api-key input')
     const api_key = core.getInput('shuttle-api-key')
-    core.debug(`Running on OS ${process.env.RUNNER_OS}`)
-    switch (process.env.RUNNER_OS) {
-      case 'Linux':
-        login_linux(api_key)
-        break
-      case 'macOS':
-        login_mac(api_key)
-        break
-      case 'Windows':
-        login_windows(api_key)
-        break
+    core.debug('Successfully read shuttle-api-key input')
+    core.debug('Checking Operating System')
+    if (process.env.RUNNER_OS === 'Linux') {
+      core.debug('Operating System is Linux')
+      core.debug('Placing API key in appropriate location')
+      await place_api_key(api_key)
+    } else {
+      core.debug('Operating System is not Linux')
+      core.debug('Operating System is not supported')
+      core.debug('Setting action as failed')
+      core.setFailed('Operating System is not supported')
     }
-    core.debug('Goodbye World!')
-  } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message)
+  } catch (error: unknown) {
+    let message
+    if (error instanceof Error) {
+      message = error.message
+    } else {
+      message = String(error)
+    }
+    core.setFailed(`Error creating file: ${message}`)
   }
 }
 
