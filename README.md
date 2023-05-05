@@ -24,7 +24,7 @@ shuttle_api_key | string | N/A | true | The API key to use to log in to the Shut
 
 name | type | description |
 -----|------|-------------|
-login_success | boolean | Whether the login was successful or not. |
+login-status | string | Whether the login was successful or not. |
 
 ## Example usage
 
