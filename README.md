@@ -6,6 +6,7 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/AliSajid/shuttle-login)
 ![Github Package License](https://img.shields.io/github/license/AliSajid/shuttle-login)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![codecov](https://codecov.io/gh/AliSajid/shuttle-login/branch/main/graph/badge.svg?token=OSiJGtYFL8)](https://codecov.io/gh/AliSajid/shuttle-login)
 
 This action allows you to log in to the [shuttle.rs](https://shuttle.rs) platform and perform subsequent actions. At the moment, this action takes the `api-key` secret and injects that into the runner environment.
 
