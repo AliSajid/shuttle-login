@@ -65,9 +65,11 @@ jobs:
         run: echo "Login success"
       - name: Check file
         if: steps.action_run.outputs.login-status == 'success'
+        shell: bash
         run: |
           [ -f ${XDG_CONFIG_HOME:-$HOME/.config}/shuttle/config.toml ] || exit 1
           content="api_key = 'abcdefgh'"
+          cat ${XDG_CONFIG_HOME:-$HOME/.config}/shuttle/config.toml
           if [[ $(cat ${XDG_CONFIG_HOME:-$HOME/.config}/shuttle/config.toml) != "$content" ]]; then
             exit 1
           fi
