@@ -1,3 +1,10 @@
+# [1.0.0-beta.3](https://github.com/AliSajid/shuttle-login/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2023-05-05)
+
+
+### Features
+
+* rename the output ([726b8e1](https://github.com/AliSajid/shuttle-login/commit/726b8e1af25f6c3269ea5a0b57fab1df949e8211))
+
 # [1.0.0-beta.2](https://github.com/AliSajid/shuttle-login/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2023-05-05)
 
 
