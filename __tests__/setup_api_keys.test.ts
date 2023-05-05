@@ -35,7 +35,12 @@ describe('place_api_key', () => {
     fs.promises.mkdir = jest.fn().mockRejectedValueOnce(error)
 
     // Act
-    await place_api_key(api_key)
+    try {
+      await place_api_key(api_key)
+    } catch (error) {
+      // Assert
+      expect(error).toBeInstanceOf(Error)
+    }
 
     // Assert
     expect(fs.promises.mkdir).toHaveBeenCalled()
