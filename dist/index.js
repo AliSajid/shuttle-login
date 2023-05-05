@@ -54,6 +54,7 @@ function run() {
                 core.debug('Placing API key in appropriate location');
                 yield (0, setup_api_keys_1.place_api_key)(api_key);
                 core.debug('Successfully placed API key in appropriate location');
+                core.setOutput('login-status', 'success');
             }
             else {
                 core.debug('Operating System is not Linux');
@@ -148,9 +149,6 @@ function place_api_key(api_key) {
             let message;
             if (error instanceof Error) {
                 message = error.message;
-            }
-            else {
-                message = String(error);
             }
             core.setFailed(`Error creating file: ${message}`);
         }
