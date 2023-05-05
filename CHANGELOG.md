@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/AliSajid/shuttle-login/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2023-05-05)
+
+
+### Features
+
+* add the appropriate output ([c0080d3](https://github.com/AliSajid/shuttle-login/commit/c0080d33b4b13d9c621b577bf3905ef55b7d9e8b))
+
 # 1.0.0-beta.1 (2023-05-05)
 
 
