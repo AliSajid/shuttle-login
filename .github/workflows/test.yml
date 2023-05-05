@@ -61,10 +61,10 @@ jobs:
           shuttle-api-key: ${{ secrets.SHUTTLE_API_KEY }}
       - name: Check outputs
         id: outputs
-        if: steps.action_run.outputs.login_success == 'true'
+        if: steps.action_run.outputs.login-status == 'success'
         run: echo "Login success"
       - name: Check file
-        if: steps.action_run.outputs.login_success == 'true'
+        if: steps.action_run.outputs.login-status == 'success'
         run: |
           [ -f ${XDG_CONFIG_HOME:-$HOME/.config}/shuttle/config.toml ] || exit 1
           content="api_key = 'abcdefgh'"
