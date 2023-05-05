@@ -12,11 +12,12 @@ async function run(): Promise<void> {
       core.debug('Operating System is Linux')
       core.debug('Placing API key in appropriate location')
       await place_api_key(api_key)
+      core.debug('Successfully placed API key in appropriate location')
     } else {
       core.debug('Operating System is not Linux')
       core.debug('Operating System is not supported')
       core.debug('Setting action as failed')
-      core.setFailed('Operating System is not supported')
+      core.setFailed('Non-linux operating systems are not supported')
     }
   } catch (error: unknown) {
     let message
