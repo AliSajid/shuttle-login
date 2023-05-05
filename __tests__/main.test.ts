@@ -31,6 +31,8 @@ describe('Main action runs properly', () => {
 ::debug::Writing to file: ${process.env.HOME}/.config/shuttle/config.toml
 ::debug::Successfully wrote ${process.env.HOME}/.config/shuttle/config.toml
 ::debug::Successfully placed API key in appropriate location
+
+::set-output name=login-status::success
 `)
   })
 
