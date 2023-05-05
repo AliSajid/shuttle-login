@@ -30,8 +30,6 @@ async function place_api_key(api_key: string): Promise<void> {
     let message
     if (error instanceof Error) {
       message = error.message
-    } else {
-      message = String(error)
     }
     core.setFailed(`Error creating file: ${message}`)
   }
