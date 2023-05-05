@@ -52,7 +52,24 @@ jobs:
   test-with-params: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-      - uses: ./
+      - name: Checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+      - name: Run the current action
+        id: action_run
+        uses: ./
         with:
           shuttle-api-key: ${{ secrets.SHUTTLE_API_KEY }}
+      - name: Check outputs
+        id: outputs
+        if: steps.action_run.outputs.login_success == 'true'
+        run: echo "Login success"
+      - name: Check file
+        if: steps.action_run.outputs.login_success == 'true'
+        run: |
+          [ -f ${XDG_CONFIG_HOME:-$HOME/.config}/shuttle/config.toml ] || exit 1
+          content="api_key = 'abcdefgh'"
+          if [[ $(cat ${XDG_CONFIG_HOME:-$HOME/.config}/shuttle/config.toml) != "$content" ]]; then
+            exit 1
+          fi
+          exit 0
+
