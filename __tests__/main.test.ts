@@ -22,7 +22,7 @@ describe('Main action runs properly', () => {
 ::debug::Operating System is Linux
 ::debug::Placing API key in appropriate location
 ::debug::$HOME: ${process.env.HOME}
-::debug::$XDG_CONFIG_HOME: undefined
+::debug::$XDG_CONFIG_HOME: ${process.env.XDG_CONFIG_HOME}
 ::debug::Setting the appropriate base directory for the config file
 ::debug::config_base_dir: ${process.env.HOME}/.config
 ::debug::Creating base directory if it does not exist
