@@ -27,7 +27,7 @@ async function place_api_key(api_key: string): Promise<void> {
     await fs.promises.writeFile(config_path, toml_data)
     core.debug(`Successfully wrote ${config_path}`)
   } catch (error: unknown) {
-    let message
+    let message = ''
     if (error instanceof Error) {
       message = error.message
     }
