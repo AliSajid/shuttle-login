@@ -47,20 +47,27 @@ function run() {
             core.debug('Running shuttle-login action');
             core.debug('Reading shuttle-api-key input');
             const api_key = core.getInput('shuttle-api-key');
-            core.debug('Successfully read shuttle-api-key input');
-            core.debug('Checking Operating System');
-            if (process.env.RUNNER_OS === 'Linux') {
-                core.debug('Operating System is Linux');
-                core.debug('Placing API key in appropriate location');
-                yield (0, setup_api_keys_1.place_api_key)(api_key);
-                core.debug('Successfully placed API key in appropriate location');
-                core.setOutput('login-status', 'success');
+            if (!api_key) {
+                core.debug('shuttle-api-key input is empty');
+                core.debug('Setting action as failed');
+                core.setFailed('shuttle-api-key input is required');
             }
             else {
-                core.debug('Operating System is not Linux');
-                core.debug('Operating System is not supported');
-                core.debug('Setting action as failed');
-                core.setFailed('Non-linux operating systems are not supported');
+                core.debug('Successfully read shuttle-api-key input');
+                core.debug('Checking Operating System');
+                if (process.env.RUNNER_OS === 'Linux') {
+                    core.debug('Operating System is Linux');
+                    core.debug('Placing API key in appropriate location');
+                    yield (0, setup_api_keys_1.place_api_key)(api_key);
+                    core.debug('Successfully placed API key in appropriate location');
+                    core.setOutput('login-status', 'success');
+                }
+                else {
+                    core.debug('Operating System is not Linux');
+                    core.debug('Operating System is not supported');
+                    core.debug('Setting action as failed');
+                    core.setFailed('Non-linux operating systems are not supported');
+                }
             }
         }
         catch (error) {
@@ -146,7 +153,7 @@ function place_api_key(api_key) {
             core.debug(`Successfully wrote ${config_path}`);
         }
         catch (error) {
-            let message;
+            let message = '';
             if (error instanceof Error) {
                 message = error.message;
             }
