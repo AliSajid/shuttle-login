@@ -1,13 +1,13 @@
 import * as process from 'process'
 import * as cp from 'child_process'
 import * as path from 'path'
+import * as core from '@actions/core'
 import {expect, test} from '@jest/globals'
-
-// shows how the runner will run a javascript action with env / stdout protocol
 
 describe('Main action runs properly', () => {
   it('runs with linux', () => {
     process.env['RUNNER_OS'] = 'Linux'
+    process.env['INPUT_SHUTTLE-API-KEY'] = 'my-api-key'
     const np = process.execPath
     const ip = path.join(__dirname, '..', 'lib', 'main.js')
     const options: cp.ExecFileSyncOptions = {
@@ -36,17 +36,37 @@ describe('Main action runs properly', () => {
 `)
   })
 
-  it('fails without linux', () => {
-    process.env['RUNNER_OS'] = 'Windows'
+  it('fails without api key', () => {
+    process.env['RUNNER_OS'] = 'Linux'
+    process.env['INPUT_SHUTTLE-API-KEY'] = ''
     const np = process.execPath
     const ip = path.join(__dirname, '..', 'lib', 'main.js')
     const options: cp.SpawnSyncOptions = {
-      shell: true, // add this option to spawn the command in a shell
+      shell: true,
       env: process.env
     }
-    // use spawnSync instead of execFileSync
     const result = cp.spawnSync(np, [ip], options)
-    // check the exit code instead of checking for an error
+
+    expect(result.stdout.toString()).toBe(`::debug::Running shuttle-login action
+::debug::Reading shuttle-api-key input
+::debug::shuttle-api-key input is empty
+::debug::Setting action as failed
+::error::shuttle-api-key input is required
+`)
+  })
+
+  it('fails without linux', () => {
+    process.env['RUNNER_OS'] = 'Windows'
+    process.env['INPUT_SHUTTLE-API-KEY'] = 'my-api-key'
+    const np = process.execPath
+    const ip = path.join(__dirname, '..', 'lib', 'main.js')
+    const options: cp.SpawnSyncOptions = {
+      shell: true,
+      env: process.env
+    }
+
+    const result = cp.spawnSync(np, [ip], options)
+
     expect(result.status).not.toBe(0)
 
     expect(result.stdout.toString()).toBe(`::debug::Running shuttle-login action
