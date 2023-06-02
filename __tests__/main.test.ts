@@ -1,7 +1,6 @@
 import * as process from 'process'
 import * as cp from 'child_process'
 import * as path from 'path'
-import * as core from '@actions/core'
 import {expect, test} from '@jest/globals'
 
 describe('Main action runs properly', () => {
@@ -39,6 +38,9 @@ describe('Main action runs properly', () => {
   it('fails without api key', () => {
     process.env['RUNNER_OS'] = 'Linux'
     process.env['INPUT_SHUTTLE-API-KEY'] = ''
+    process.env['GITHUB_ACTIONS'] = 'true'
+    process.env['ACTIONS_STEP_DEBUG'] = 'true'
+    process.env['ACTIONS_RUNNER_DEBUG'] = 'true'
     const np = process.execPath
     const ip = path.join(__dirname, '..', 'lib', 'main.js')
     const options: cp.SpawnSyncOptions = {
